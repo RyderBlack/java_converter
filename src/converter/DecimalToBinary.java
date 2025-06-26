@@ -6,21 +6,38 @@ public class DecimalToBinary {
 
     public static String toBinary(int n) {
         String binaire = "";
-
+        if (n == 0) return "00000000";
         while (n > 0) {
             binaire = (n % 2) + binaire;
             n = n / 2;
         }
-
         while (binaire.length() < 8) {
             binaire = "0" + binaire;
         }
-
         return binaire;
     }
 
+    public static int stringToDecimal(String input) {
+        int result = 0;
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c < '0' || c > '9') {
+                throw new IllegalArgumentException("Erreur : caractère non numérique détecté.");
+            }
+            result = result * 10 + (c - '0');
+        }
+        return result;
+    }
+
     public static int binaryToDecimal(String binary) {
-        return Integer.parseInt(binary, 2);
+        int decimal = 0;
+        for (int i = 0; i < binary.length(); i++) {
+            char bit = binary.charAt(binary.length() - 1 - i);
+            if (bit == '1') {
+                decimal += (1 << i);
+            }
+        }
+        return decimal;
     }
 
     public static String binaryToText(String binary) {
@@ -50,7 +67,7 @@ public class DecimalToBinary {
             String originalInput = input;
 
             if (input.matches("\\d+")) {
-                int number = Integer.parseInt(input);
+                int number = stringToDecimal(input);
                 result.append(toBinary(number));
                 System.out.println("Nombre original : " + number);
                 System.out.println("Binaire : " + result);
@@ -102,4 +119,3 @@ public class DecimalToBinary {
         sc.close();
     }
 }
-
