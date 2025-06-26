@@ -2,6 +2,10 @@ package converter;
 import java.util.Scanner;
 
 public class BinaryToText {
+    
+    private static final int ALPHABET_SIZE = 26;
+    private static final char FIRST_LOWERCASE = 'a';
+    private static final char FIRST_UPPERCASE = 'A';
 
     public static String Converter(String binaire) {
         if (!binaire.matches("[01]+")) {
@@ -35,6 +39,32 @@ public class BinaryToText {
         return binaire.toString();
     }
 
+    public static String caesarEncrypt(String text, int shift) {
+        shift = shift % ALPHABET_SIZE;
+        if (shift < 0) {
+            shift += ALPHABET_SIZE; // Handle negative shifts
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isLowerCase(c) ? FIRST_LOWERCASE : FIRST_UPPERCASE;
+                int originalPosition = c - base;
+                int newPosition = (originalPosition + shift) % ALPHABET_SIZE;
+                result.append((char) (base + newPosition));
+            } else {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static String caesarDecrypt(String text, int shift) {
+        return caesarEncrypt(text, ALPHABET_SIZE - (shift % ALPHABET_SIZE));
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean continuer = true;
@@ -48,6 +78,24 @@ public class BinaryToText {
             try {
                 texte = Converter(binaire);
                 System.out.println("Texte correspondant : " + texte);
+                
+                // Ask if user wants to encrypt the text
+                System.out.print("Voulez-vous chiffrer ce texte avec le chiffre de César ? (o/n) ");
+                if (scanner.nextLine().equalsIgnoreCase("o")) {
+                    System.out.print("Entrez le décalage pour le chiffrement : ");
+                    int shift = Integer.parseInt(scanner.nextLine());
+                    String encrypted = caesarEncrypt(texte, shift);
+                    System.out.println("Texte chiffré : " + encrypted);
+                    
+                    System.out.print("Voulez-vous déchiffrer le texte ? (o/n) ");
+                    if (scanner.nextLine().equalsIgnoreCase("o")) {
+                        String decrypted = caesarDecrypt(encrypted, shift);
+                        System.out.println("Texte déchiffré : " + decrypted);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur : le décalage doit être un nombre entier.");
+                continue;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -55,7 +103,7 @@ public class BinaryToText {
 
             boolean choixValide = false;
             while (!choixValide) {
-                System.out.println("\nSouhaitez-vous :\n1. Revenir au binaire depuis le texte\n2. Faire une nouvelle conversion\n3. Quitter");
+                System.out.println("\nSouhaitez-vous :\n1. Revenir au binaire depuis le texte\n2. Chiffrer le texte avec César\n3. Faire une nouvelle conversion\n4. Quitter");
                 String choix = scanner.nextLine();
 
                 switch (choix) {
@@ -74,7 +122,7 @@ public class BinaryToText {
                         break;
 
                     default:
-                        System.out.println("Choix invalide. Veuillez entrer 1, 2 ou 3.");
+                        System.out.println("Choix invalide. Veuillez entrer un nombre entre 1 et 4.");
                 }
             }
         }
