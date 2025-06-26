@@ -29,26 +29,6 @@ public class DecimalToBinary {
         return result;
     }
 
-    public static int binaryToDecimal(String binary) {
-        int decimal = 0;
-        for (int i = 0; i < binary.length(); i++) {
-            char bit = binary.charAt(binary.length() - 1 - i);
-            if (bit == '1') {
-                decimal += (1 << i);
-            }
-        }
-        return decimal;
-    }
-
-    public static String binaryToText(String binary) {
-        StringBuilder text = new StringBuilder();
-        for (int i = 0; i < binary.length(); i += 8) {
-            String byteStr = binary.substring(i, i + 8);
-            int charCode = binaryToDecimal(byteStr);
-            text.append((char) charCode);
-        }
-        return text.toString();
-    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -85,37 +65,7 @@ public class DecimalToBinary {
                 continue;
             }
 
-            boolean choixValide = false;
-            while (!choixValide) {
-                System.out.println("\nSouhaitez-vous :\n1. Revenir à l'original à partir du binaire\n2. Faire une nouvelle conversion\n3. Quitter");
-                String choix = sc.nextLine();
-
-                switch (choix) {
-                    case "1":
-                        if (originalInput.matches("\\d+")) {
-                            System.out.println("Décimal : " + binaryToDecimal(result.toString()));
-                        } else if (originalInput.matches("[a-zA-Z]+")) {
-                            System.out.println("Texte : " + binaryToText(result.toString()));
-                        }
-                        choixValide = true;
-                        break;
-
-                    case "2":
-                        choixValide = true;
-                        break;
-
-                    case "3":
-                        continuer = false;
-                        choixValide = true;
-                        break;
-
-                    default:
-                        System.out.println("Choix invalide. Veuillez entrer 1, 2 ou 3.");
-                }
-            }
         }
 
-        System.out.println("Au revoir !");
-        sc.close();
     }
 }
