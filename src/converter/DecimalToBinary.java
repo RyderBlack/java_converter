@@ -29,7 +29,6 @@ public class DecimalToBinary {
         return result;
     }
 
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean continuer = true;
@@ -44,7 +43,6 @@ public class DecimalToBinary {
             }
 
             StringBuilder result = new StringBuilder();
-            String originalInput = input;
 
             if (input.matches("\\d+")) {
                 int number = stringToDecimal(input);
