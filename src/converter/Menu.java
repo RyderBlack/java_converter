@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class Menu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.println("\n====== MENU ======");
             System.out.println("1. Texte ou nombre → Binaire");
             System.out.println("2. Binaire → Texte (avec option d'encryptage César)");
@@ -15,9 +15,9 @@ public class Menu {
             System.out.println("5. Binaire → Octal");
             System.out.println("6. Quitter");
             System.out.print("Choix : ");
-            String choix = scanner.nextLine();
+            String choice = scanner.nextLine();
 
-            switch (choix) {
+            switch (choice) {
                 case "1": {
                     System.out.print("Entrez un mot ou un nombre : ");
                     String input1 = scanner.nextLine().trim();
@@ -109,7 +109,15 @@ public class Menu {
                         System.out.println("Hexadécimal : " + hex);
 
                         System.out.print("Voulez-vous reconvertir ce hexadécimal en binaire ? (o/n) : ");
-                        // Ajoute la method dans l'entre sens
+                        String reconvertirHex = scanner.nextLine();
+                        if (reconvertirHex.equalsIgnoreCase("o")) {
+                            try {
+                                String binaryFromHex = HexToBinary.Converter(hex);
+                                System.out.println("Binaire : " + binaryFromHex);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Erreur lors de la conversion : " + e.getMessage());
+                            }
+                        }
 
                     } catch (IllegalArgumentException e) {
                         System.out.println("Erreur : " + e.getMessage());
@@ -126,7 +134,15 @@ public class Menu {
                         System.out.println("Octal : " + octal);
 
                         System.out.print("Voulez-vous reconvertir cet octal en binaire ? (o/n) : ");
-                        // Ajoute dans l'autre sens
+                        String reconvertirOctal = scanner.nextLine();
+                        if (reconvertirOctal.equalsIgnoreCase("o")) {
+                            try {
+                                String binaryFromOctal = OctalToBinary.Converter(octal);
+                                System.out.println("Binaire : " + binaryFromOctal);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Erreur lors de la conversion : " + e.getMessage());
+                            }
+                        }
 
                     } catch (IllegalArgumentException e) {
                         System.out.println("Erreur : " + e.getMessage());
@@ -135,7 +151,7 @@ public class Menu {
                 }
 
                 case "6":
-                    continuer = false;
+                    isRunning = false;
                     System.out.println("Au revoir !");
                     break;
 
