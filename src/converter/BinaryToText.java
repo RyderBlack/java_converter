@@ -35,14 +35,14 @@ public class BinaryToText {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.print("\nEntrez une chaîne binaire (ou 'q' pour quitter) : ");
             String entree = scanner.nextLine().trim().replaceAll("\\s+", "");
             
             if (entree.equalsIgnoreCase("q")) {
-                continuer = false;
+                isRunning = false;
                 continue;
             }
 
@@ -52,12 +52,11 @@ public class BinaryToText {
                 
                 System.out.print("Reconvertir en binaire ? (o/n) : ");
                 if (scanner.nextLine().trim().equalsIgnoreCase("o")) {
-                    // Convertir le texte en binaire (8 bits par caractère)
-                    StringBuilder binaire = new StringBuilder();
+                    StringBuilder my_binary = new StringBuilder();
                     for (char c : texte.toCharArray()) {
-                        binaire.append(String.format("%8s", Integer.toBinaryString(c & 0xFF)).replace(' ', '0'));
+                        my_binary.append(String.format("%8s", Integer.toBinaryString(c & 0xFF)).replace(' ', '0'));
                     }
-                    System.out.println("Binaire : " + binaire.toString());
+                    System.out.println("Binaire : " + my_binary.toString());
                 }
                 
             } catch (IllegalArgumentException e) {

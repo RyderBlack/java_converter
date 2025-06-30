@@ -20,7 +20,6 @@ public class BinaryToHexadecimal {
     }
 
     public static String hexToBinary(String hexString) {
-        // Supprimer le préfixe 0x si présent
         hexString = hexString.startsWith("0x") ? hexString.substring(2) : hexString;
 
         if (!hexString.matches("[0-9A-Fa-f]+")) {
@@ -29,7 +28,6 @@ public class BinaryToHexadecimal {
 
         String binary = new BigInteger(hexString, 16).toString(2);
 
-        // Ajouter des zéros non significatifs pour obtenir une longueur multiple de 4
         if (binary.length() % 4 != 0) {
             binary = "0".repeat((4 - binary.length() % 4) % 4) + binary;
         }
@@ -39,14 +37,14 @@ public class BinaryToHexadecimal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.print("\nEntrez une chaîne binaire (ou 'q' pour quitter) : ");
             String entree = scanner.nextLine().trim().replaceAll("\\s+", "");
             
             if (entree.equalsIgnoreCase("q")) {
-                continuer = false;
+                isRunning = false;
                 continue;
             }
 
@@ -56,8 +54,8 @@ public class BinaryToHexadecimal {
                 
                 System.out.print("Reconvertir en binaire ? (o/n) : ");
                 if (scanner.nextLine().trim().equalsIgnoreCase("o")) {
-                    String binaire = hexToBinary(hex);
-                    System.out.println("Valeur binaire : " + binaire);
+                    String my_binary = hexToBinary(hex);
+                    System.out.println("Valeur binaire : " + my_binary);
                 }
                 
             } catch (IllegalArgumentException e) {

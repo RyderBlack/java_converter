@@ -24,24 +24,24 @@ public class HexToBinary {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.print("\nEntrez une chaîne hexadécimale (ou 'q' pour quitter) : ");
             String entree = scanner.nextLine().trim();
             
             if (entree.equalsIgnoreCase("q")) {
-                continuer = false;
+                isRunning = false;
                 continue;
             }
 
             try {
-                String binaire = convertToBinary(entree);
-                System.out.println("Binaire : " + binaire);
+                String my_binary = convertToBinary(entree);
+                System.out.println("Binaire : " + my_binary);
                 
                 System.out.print("Reconvertir en hexadécimal ? (o/n) : ");
                 if (scanner.nextLine().trim().equalsIgnoreCase("o")) {
-                    String hex = new BigInteger(binaire, 2).toString(16).toUpperCase();
+                    String hex = new BigInteger(my_binary, 2).toString(16).toUpperCase();
                     System.out.println("Hexadécimal : 0x" + hex);
                 }
                 

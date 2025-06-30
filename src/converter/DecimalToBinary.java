@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class DecimalToBinary {
 
     public static String toBinary(int n) {
-        String binaire = "";
+        String my_binary = "";
         if (n == 0) return "00000000";
         while (n > 0) {
-            binaire = (n % 2) + binaire;
+            my_binary = (n % 2) + my_binary;
             n = n / 2;
         }
-        while (binaire.length() < 8) {
-            binaire = "0" + binaire;
+        while (my_binary.length() < 8) {
+            my_binary = "0" + my_binary;
         }
-        return binaire;
+        return my_binary;
     }
 
     public static int stringToDecimal(String input) {
@@ -31,9 +31,9 @@ public class DecimalToBinary {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.println("\nEntrez un mot ou un nombre à convertir en binaire :");
             String input = sc.nextLine().trim();
 

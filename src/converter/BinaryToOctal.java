@@ -11,7 +11,6 @@ public class BinaryToOctal {
             throw new IllegalArgumentException("Erreur : la chaîne binaire ne doit contenir que des 0 et des 1.");
         }
 
-        // Ajouter des zéros non significatifs pour obtenir une longueur multiple de 3
         while (binaryString.length() % 3 != 0) {
             binaryString = "0" + binaryString;
         }
@@ -26,7 +25,6 @@ public class BinaryToOctal {
 
         String binary = new BigInteger(octalString, 8).toString(2);
 
-        // Ajouter des zéros non significatifs pour obtenir une longueur multiple de 3
         while (binary.length() % 3 != 0) {
             binary = "0" + binary;
         }
@@ -36,14 +34,14 @@ public class BinaryToOctal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean continuer = true;
+        boolean isRunning = true;
 
-        while (continuer) {
+        while (isRunning) {
             System.out.print("\nEntrez une chaîne binaire (ou 'q' pour quitter) : ");
             String entree = scanner.nextLine().replaceAll("\\s+", "");
             
             if (entree.equalsIgnoreCase("q")) {
-                continuer = false;
+                isRunning = false;
                 continue;
             }
 
@@ -53,8 +51,8 @@ public class BinaryToOctal {
                 
                 System.out.print("Reconvertir en binaire ? (o/n) : ");
                 if (scanner.nextLine().trim().equalsIgnoreCase("o")) {
-                    String binaire = octalToBinary(octal);
-                    System.out.println("Valeur binaire : " + binaire);
+                    String my_binary = octalToBinary(octal);
+                    System.out.println("Valeur binaire : " + my_binary);
                 }
                 
             } catch (IllegalArgumentException e) {
