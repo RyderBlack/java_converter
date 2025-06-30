@@ -29,7 +29,6 @@ public class BinaryToHexadecimal {
 
         String binary = new BigInteger(hexString, 16).toString(2);
 
-        // Ajouter des zéros non significatifs pour obtenir une longueur multiple de 4
         if (binary.length() % 4 != 0) {
             binary = "0".repeat((4 - binary.length() % 4) % 4) + binary;
         }
